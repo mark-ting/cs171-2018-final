@@ -1,0 +1,25 @@
+nav {
+  margin-bottom: 10vh;
+}
+
+header,
+section {
+  height: 100vh;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(228,228,228);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(192,192,192);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(128,128,128);
+}
