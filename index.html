@@ -9,6 +9,7 @@
 
     <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="res/css/scroll.css" rel="stylesheet" type="text/css">
+    <link href="res/css/barchart.css" rel="stylesheet" type="text/css">
 </head>
 
 <body id="page-top">
@@ -38,6 +39,67 @@
         </div>
     </section>
 
+    <section id="trip-duration">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h1>Trip Duration and Distance</h1>
+                    <div class="row">
+                        <div class="col-md-8" >
+                            <button type="button" class="btn btn-link" id="change-sorting">
+                                <i class="glyphicon glyphicon-sort"></i>
+                                Sort
+                            </button>
+                            <div id="barChartArea">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <select class="select-box" id="data-freq" onchange="changeFrequency()">
+                                <option value="week" selected="selected">Weekly</option>
+                                <option value="month">Monthly</option>
+                            </select>
+                            data:<br/>
+                            <select class="select-box" id="trip-info-type">
+                                <option value="duration" selected="selected">Duration</option>
+                                <option value="distance">Distance</option>
+                            </select>
+                            of Blue Bikes starting from station
+                            <select class="select-box" id="station">
+
+                            </select>
+                            in
+                            <div id="month" style="display: none">
+                                <select class="select-box" id="month-drop">
+                                    <option value="1" selected="selected">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                            <div id="week">
+                                Week
+                                <select class="select-box" id="week-drop">
+
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact">
         <div class="container-fluid">
             <div class="row">
@@ -61,6 +123,10 @@
     <script src="vendor/popper/popper.min.js"></script>
     <script src="vendor/bootstrap/bootstrap.min.js"></script>
     <script src="vendor/d3/d3.min.js"></script>
+    <script src="vendor/d3/d3-tip.js"></script>
+
+    <script src="js/barChartDD.js"></script>
+    <script src="js/mainBarChart.js"></script>
 </body>
 
 </html>
