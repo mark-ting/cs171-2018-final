@@ -1,0 +1,12 @@
+.row, .container-fluid {
+  height: 100%;
+}
+
+#map-area {
+  height: 100%;
+}
+
+table td:nth-child(1) {
+  font-weight: bold;
+  width: 200px;
+}

@@ -32,13 +32,13 @@ function changeFrequency(){
 
 fillWeek();
 
-d3.csv('data/station.csv')
+d3.csv('res/data/station.csv')
     .then(function (stationData) {
         fillStation(stationData);
     });
 
 var tripBarChart;
-d3.csv('data/trips_2015.csv')
+d3.csv('res/data/trips_2015.csv')
     .then(function (tripData) {
         tripBarChart = new barChart("barChartArea", tripData);
         d3.select("#station").on("change", function () {
