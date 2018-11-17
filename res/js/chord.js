@@ -28,7 +28,7 @@ var matrix2 = [];
 var n = 0;
 var n2 = 0;
 
-d3.csv('data/merged.csv')
+d3.csv('res/data/merged.csv')
     .then(function (data) {
 
         data.forEach(function(d){
