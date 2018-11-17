@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Map Prototype</title>
+
+    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/leaflet/leaflet.css" rel="stylesheet" type="text/css">
+    <link href="res/css/scroll.css" rel="stylesheet" type="text/css">
+    <link href="res/css/map.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <section id="map">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div id="map-area"></div>
+                </div>
+                <div class="col-lg-4">
+                    <h3><span id="sidebar-station">#station</span></h3>
+                    <small><span id="sidebar-station-municipality">$station_municipality</span> - Station ID: <span id="sidebar-station-id">#station_id</span></small>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>No. of Docks</td>
+                                <td><span id="sidebar-station-docks">-</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/bootstrap.min.js"></script>
+    <script src="vendor/d3/d3.min.js"></script>
+
+    <script src="vendor/leaflet/leaflet.js"></script>
+    <script src="res/js/StationMap.js"></script>
+    <script src="res/js/mapdemo.js"></script>
+</body>
+
+</html>
