@@ -1,1 +1,5 @@
 node_modules/
+
+# avoid commiting large datasets
+res/data/merged.csv
+res/data/trips_2015.csv
