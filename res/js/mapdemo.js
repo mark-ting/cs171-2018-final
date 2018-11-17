@@ -12,8 +12,8 @@ async function renderMap() {
 
   // Attempt initialization
   try {
-    const map = new Map('map-area', 'map-sidebar', stations)
-    map.init()
+    const stationMap = new StationMap('map-area', 'map-sidebar', stations)
+    stationMap.init()
   } catch (e) {
     console.warn('Error occurred while initialzing Leaflet/map.')
     console.warn(e)
