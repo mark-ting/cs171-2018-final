@@ -8,6 +8,7 @@
     <title>CS 171</title>
 
     <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/leaflet/leaflet.css" rel="stylesheet" type="text/css">
     <link href="res/css/scroll.css" rel="stylesheet" type="text/css">
     <link href="res/css/barchart.css" rel="stylesheet" type="text/css">
 </head>
@@ -45,7 +46,7 @@
                 <div class="col-lg-10 mx-auto">
                     <h1>Trip Duration and Distance</h1>
                     <div class="row">
-                        <div class="col-md-8" >
+                        <div class="col-md-8">
                             <button type="button" class="btn btn-link" id="change-sorting">
                                 <i class="glyphicon glyphicon-sort"></i>
                                 Sort
@@ -60,7 +61,7 @@
                                 <option value="week" selected="selected">Weekly</option>
                                 <option value="month">Monthly</option>
                             </select>
-                            data:<br/>
+                            data:<br />
                             <select class="select-box" id="trip-info-type">
                                 <option value="duration" selected="selected">Duration</option>
                                 <option value="distance">Distance</option>
@@ -103,11 +104,33 @@
     <section id="contact">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-5 mx-auto" id = 'chord1'>
+                <div class="col-lg-5 mx-auto" id="chord1">
                     <h1>Region</h1>
                 </div>
-                <div class="col-lg-5 mx-auto" id = 'chord2'>
+                <div class="col-lg-5 mx-auto" id="chord2">
                     <h1>Station</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="map">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div id="map-area"></div>
+                </div>
+                <div class="col-lg-4">
+                    <h3><span id="sidebar-station">-</span></h3>
+                    <small><span id="sidebar-station-municipality">-</span> (ID: <span id="sidebar-station-id">#</span>)</small>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>No. of Docks</td>
+                                <td><span id="sidebar-station-docks">-</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -128,7 +151,10 @@
     <script src="vendor/d3/d3.min.js"></script>
     <script src="vendor/d3-tip/d3-tip.js"></script>
     <script src="vendor/underscore/underscore-min.js"></script>
+    <script src="vendor/leaflet/leaflet.js"></script>
 
+    <script src="res/js/StationMap.js"></script>
+    <script src="res/js/map.js"></script>
 
     <script src="res/js/barChartDD.js"></script>
     <script src="res/js/mainBarChart.js"></script>
