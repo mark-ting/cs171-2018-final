@@ -120,5 +120,7 @@ class StationMap {
     $('#sidebar-station-municipality').text(station['Municipality'])
     $('#sidebar-station-id').text(station['Station ID'])
     $('#sidebar-station-docks').text(station['# of Docks'])
+    $('#sidebar-station-outgoing').text(station['outgoing'])
+    $('#sidebar-station-incoming').text(station['incoming'])
   }
 }
