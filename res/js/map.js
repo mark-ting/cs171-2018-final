@@ -2,6 +2,11 @@ $('document').ready(() => {
   renderMap()
 })
 
+const Boston = {
+  Latitude: 42.3601,
+  Longitude: -71.075
+}
+
 async function renderMap() {
   // Load station data
   const stationCsvData = await d3.csv('res/data/Hubway_Stations_2011_2016.csv')
@@ -24,10 +29,12 @@ async function renderMap() {
       return station
     })
 
+  // TODO: move this into shared data streaming manager
+  const municipalities = [...new Set(stations.map(s => s.Municipality))]
+
   // Attempt initialization
   try {
-    const stationMap = new StationMap('map-area', 'map-sidebar', stations)
-    stationMap.init()
+    const stationMap = new StationMap('map-area', Boston, stations, 'map-sidebar')
   } catch (e) {
     console.warn('Error occurred while initialzing Leaflet/map.')
     console.warn(e)
