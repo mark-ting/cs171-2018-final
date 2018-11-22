@@ -1,6 +1,7 @@
 node_modules/
 .idea/
 .DS_Store
+*.icloud
 
 # avoid commiting large datasets
 res/data/merged.csv
