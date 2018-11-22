@@ -9,7 +9,7 @@ h1 {
 
 body {
     font-family: "Kohinoor Bangla", fantasy;
-    padding: 50px;
+    padding-top: 50px;
     background-color: #dccac6;
 }
 
@@ -72,10 +72,7 @@ section {
 .quotes {
     font-style: italic;
     padding: 20px;
-    border-top: 1px solid lightskyblue;
-    border-right: 1px solid lightskyblue;
-    border-left: 1px solid lightskyblue;
-    border-bottom: 1px solid lightskyblue;
+    border: 1px solid lightskyblue;
 }
 
 .caption {
