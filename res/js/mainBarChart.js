@@ -1,9 +1,20 @@
 
 
+// function fillStation(stationData) {
+//     var result = "<option value='"+stationData[0].id+"' selected='selected'>"+stationData[0].name+"</option>";
+//     for(var i=1; i<stationData.length; i++){
+//         result += "<option value='"+stationData[i].id+"'>"+stationData[i].name+"</option>";
+//     }
+//     document.getElementById("station").innerHTML = result;
+// }
+
 function fillStation(stationData) {
-    var result = "<option value='"+stationData[0].id+"' selected='selected'>"+stationData[0].station+"</option>";
-    for(var i=1; i<stationData.length; i++){
-        result += "<option value='"+stationData[i].id+"'>"+stationData[i].station+"</option>";
+    var result = "";
+    var count = 0;
+    for (var key in stationData) {
+        if(count==0) result = "<option value='"+key+"' selected='selected'>"+stationData[key]+"</option>";
+        else result += "<option value='"+key+"'>"+stationData[key]+"</option>";
+        count+=1;
     }
     document.getElementById("station").innerHTML = result;
 }
@@ -32,14 +43,30 @@ function changeFrequency(){
 
 fillWeek();
 
-d3.csv('res/data/station.csv')
-    .then(function (stationData) {
-        fillStation(stationData);
-    });
+// var proxy = "http://michaeloppermann.com/proxy.php?url=";
+// var stationUrl = "http://vps77598.vps.ovh.ca/bluebikes/stations.php"
+// var tripUrl = "http://vps77598.vps.ovh.ca/bluebikes/rides.php?start=2015-05-25&end=2016-05-25"
 
 var tripBarChart;
+
+
+// $.getJSON(proxy+stationUrl, function(jsonData){
+//     var station = jsonData.stations;
+//     fillStation(station);
+// });
+
+
+
+
+
 d3.csv('res/data/trips_2015.csv')
     .then(function (tripData) {
+        var station = {};
+        tripData.forEach(function (d) {
+            if(!(d.start_station_id in station)) station[d.start_station_id] = d.start_station;
+        });
+        fillStation(station);
+
         tripBarChart = new barChart("barChartArea", tripData);
         d3.select("#station").on("change", function () {
             tripBarChart.initVis();

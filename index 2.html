@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CS 171</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="vendor/leaflet/leaflet.css" rel="stylesheet" type="text/css">
     <link href="res/css/scroll.css" rel="stylesheet" type="text/css">
@@ -190,36 +191,39 @@
     <section id="trip-duration">
         <div class="container-fluid vis">
             <div class="row">
-                <div class="col-lg-10 mx-auto">
+                <div class="col-md-12 mx-auto">
                     <h1>Where Do We Go?</h1>
                     <h2>Trip Duration and Distance</h2>
                     <div class="row">
-                        <div class="col-md-8">
-                            <button type="button" class="btn btn-link" id="change-sorting">
-                                <i class="glyphicon glyphicon-sort"></i>
+                        <div class="col-md-7">
+                            <button type="button" class="btn btn-default" id="change-sorting">
+                                <span class="glyphicon glyphicon-sort"></span>
                                 Sort
                             </button>
-                            <div id="barChartArea">
-
-                            </div>
+                            <div id="barChartArea"></div>
+                            <div id="notation">*More saturated color represents longer trip.</div>
                         </div>
 
-                        <div class="col-md-4">
-                            <select class="select-box" id="data-freq" onchange="changeFrequency()">
-                                <option value="week" selected="selected">Weekly</option>
-                                <option value="month">Monthly</option>
-                            </select>
-                            data:
+                        <div class="col-md-5 bar-choice">
+                            <div id="freq-cat">
+                                <select class="select-box" id="data-freq" onchange="changeFrequency()">
+                                    <option value="week" selected="selected">Weekly</option>
+                                    <option value="month">Monthly</option>
+                                </select>
+                                Data:
+                            </div>
                             <br>
                             <select class="select-box" id="trip-info-type">
                                 <option value="duration" selected="selected">Duration</option>
                                 <option value="distance">Distance</option>
                             </select>
                             of Blue Bikes starting from station
-                            <select class="select-box" id="station">
-
-                            </select>
+                            <select class="select-box" id="station"></select>
                             in
+                            <div id="week">
+                                week
+                                <select class="select-box" id="week-drop"></select>
+                            </div>
                             <div id="month" style="display: none">
                                 <select class="select-box" id="month-drop">
                                     <option value="1" selected="selected">January</option>
@@ -236,13 +240,7 @@
                                     <option value="12">December</option>
                                 </select>
                             </div>
-                            <div id="week">
-                                Week
-                                <select class="select-box" id="week-drop">
-
-                                </select>
-                            </div>
-
+                            <div id="trip-summary"></div>
                         </div>
                     </div>
                 </div>
@@ -334,16 +332,16 @@
     <script src="vendor/leaflet/leaflet.js"></script>
 
     <!-- map -->
-    <script src="res/js/StationMap.js"></script>
-    <script src="res/js/map.js"></script>
+    <!--<script src="res/js/StationMap.js"></script>-->
+    <!--<script src="res/js/map.js"></script>-->
 
     <!-- bar charts -->
     <script src="res/js/barChartDD.js"></script>
     <script src="res/js/mainBarChart.js"></script>
 
     <!-- chord diagrams -->
-    <script src="res/js/chord.js"></script>
-    <script src="res/js/chordDiagram.js"></script>
+    <!--<script src="res/js/chord.js"></script>-->
+    <!--<script src="res/js/chordDiagram.js"></script>-->
 </body>
 
 </html>

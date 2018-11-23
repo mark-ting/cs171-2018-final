@@ -27,3 +27,45 @@
     top: 100%;
     left: 0;
 }
+
+h2 {
+    font-size: 24px;
+    font-family: Courier;
+    margin-left: 30px;
+}
+
+
+.bar-choice {
+    font-family: "Comic Sans MS";
+    font-size: 14px;
+    padding-bottom: 2px;
+}
+
+#station {
+    width: 50%;
+}
+
+#freq-cat {
+    margin-top: 5px;
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+#data-freq {
+    margin-right: 3px;
+}
+
+#notation {
+    font-size: 12px;
+    margin-left: 30px;
+}
+
+#change-sorting {
+    font-size: 14px;
+    margin-left: 30px;
+}
+
+.title {
+    font-size: 14px;
+    font-family: Courier;
+}

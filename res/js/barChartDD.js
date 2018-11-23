@@ -13,9 +13,9 @@ barChart.prototype.initVis = function() {
 
     $("#"+vis.parentElement).empty();
 
-    vis.margin = { top: 30, right: 60, bottom: 30, left: 60};
+    vis.margin = { top: 30, right: 30, bottom: 30, left: 60};
     vis.width = $("#"+vis.parentElement).width() - vis.margin.left - vis.margin.right;
-    vis.height = 300 - vis.margin.top - vis.margin.bottom;
+    vis.height = 400 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -97,9 +97,9 @@ barChart.prototype.wrangleData = function(){
         return b.num - a.num;
     });
 
-    if(occSort.length<=15) vis.displayData = filteredData;
+    if(occSort.length<=20) vis.displayData = filteredData;
     else{
-        occSort = occSort.slice(0, 15);
+        occSort = occSort.slice(0, 20);
         var ids = [];
         occSort.forEach(function (value) {
             ids.push(value.id);
