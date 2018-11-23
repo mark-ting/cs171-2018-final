@@ -56,60 +56,76 @@ barChart.prototype.initVis = function() {
 barChart.prototype.wrangleData = function(){
     var vis = this;
 
-    var stationSelection = d3.select("#station").property("value");
-    var freqSelection = d3.select("#data-freq").property("value");
-    var timeSelection;
+    vis.stationSelection = d3.select("#station").property("value");
+    vis.freqSelection = d3.select("#data-freq").property("value");
     var filteredData = vis.data.filter(function (d) {
-        if(freqSelection=="week") {
-            timeSelection = d3.select("#week-drop").property("value");
-            return d.start_station_id==stationSelection && d.week==timeSelection;
+        if(vis.freqSelection=="week") {
+            vis.timeSelection = d3.select("#week-drop").property("value");
+            return d.start_station_id==vis.stationSelection && d.week==vis.timeSelection;
         }
         else {
-            timeSelection = d3.select("#month-drop").property("value");
-            return d.start_station_id==stationSelection && d.month==timeSelection;
+            vis.timeSelection = d3.select("#month-drop").property("value");
+            return d.start_station_id==vis.stationSelection && d.month==vis.timeSelection;
         }
     });
 
-    var bikeID = {};
-    filteredData.forEach(function (d) {
-        if (!(d.bikeid in bikeID)) {
-            d['numOcc'] = 1;
-            bikeID[d.bikeid] = 1;
-        } else {
-            bikeID[d.bikeid] += 1;
-            d['numOcc'] = bikeID[d.bikeid];
+    if(filteredData.length>0){
+        var bikeID = {};
+        filteredData.forEach(function (d) {
+            if (!(d.bikeid in bikeID)) {
+                d['numOcc'] = 1;
+                bikeID[d.bikeid] = 1;
+            } else {
+                bikeID[d.bikeid] += 1;
+                d['numOcc'] = bikeID[d.bikeid];
+            }
+        });
+
+        vis.totalDuration = 0;
+        vis.totalDistance = 0;
+        filteredData.forEach(function (d) {
+            d['totalOcc'] = bikeID[d.bikeid];
+            d.duration = +d.duration;
+            d.distance = +d.distance;
+            vis.totalDuration += d.duration;
+            vis.totalDistance += d.distance;
+        });
+
+        var occSort = [];
+        for(var key in bikeID) {
+            var count = {
+                "id": key,
+                "num": bikeID[key]
+            };
+            occSort.push(count);
         }
-    });
+        occSort.sort(function (a, b) {
+            return b.num - a.num;
+        });
 
-    filteredData.forEach(function (d) {
-        d['totalOcc'] = bikeID[d.bikeid];
-    });
+        if(occSort.length<=20) vis.displayData = filteredData;
+        else{
+            occSort = occSort.slice(0, 20);
+            var ids = [];
+            occSort.forEach(function (value) {
+                ids.push(value.id);
+            });
+            vis.displayData = filteredData.filter(function (d) {
+                return ids.includes(d.bikeid);
+            });
+        }
 
-    var occSort = [];
-    for(var key in bikeID) {
-        var count = {
-            "id": key,
-            "num": bikeID[key]
-        };
-        occSort.push(count);
+        vis.updateVis();
     }
-    occSort.sort(function (a, b) {
-        return b.num - a.num;
-    });
-
-    if(occSort.length<=20) vis.displayData = filteredData;
-    else{
-        occSort = occSort.slice(0, 20);
-        var ids = [];
-        occSort.forEach(function (value) {
-            ids.push(value.id);
-        });
-        vis.displayData = filteredData.filter(function (d) {
-            return ids.includes(d.bikeid);
-        });
+    else {
+        $("#"+vis.parentElement).empty();
+        $("#trip-summary").empty();
+        var displayText = "<p id='unavailable'>Trip information is not available given the selected filter.<br>";
+        displayText += "This station may be closed during the chosen period.<br>";
+        displayText += "Please select another station or time range. </p>";
+        document.getElementById(vis.parentElement).innerHTML= displayText;
     }
 
-    vis.updateVis();
 }
 
 
@@ -120,8 +136,6 @@ barChart.prototype.updateVis = function () {
 
     var bikeInfo = {};
     vis.displayData.forEach(function(d){
-        d.duration = +d.duration;
-        d.distance = +d.distance;
         if (!(d.bikeid in bikeInfo)) {
             bikeInfo[d.bikeid] = d[infoType];
             d['totaldist'] = d[infoType];
@@ -198,5 +212,24 @@ barChart.prototype.updateVis = function () {
         .ease(d3.easeCubicOut)
         .call(vis.yAxis);
 
+
+    var tripSummary = "";
+    var numBikes = Object.keys(bikeInfo).length;
+    if (numBikes==20) tripSummary += "More than 20 bikes started from ";
+    else tripSummary += numBikes + " bikes started from ";
+    tripSummary += vis.displayData[0].start_station + " in ";
+    if(vis.freqSelection=="week") {
+
+        tripSummary += "week " + vis.timeSelection;
+    }
+    else {
+        tripSummary += vis.timeSelection;
+    }
+    tripSummary += ", totaling more than " + vis.totalDistance.toFixed(2) + " km and ";
+    tripSummary += (vis.totalDuration/60).toFixed(2) + " minutes.";
+    tripSummary += "This saves at least " + (vis.totalDistance/100).toFixed(2) + " liters of fuel";
+    tripSummary += " and reduces carbon emission by " + (vis.totalDistance/100*2.3035).toFixed(2) + " kg.";
+
+    document.getElementById("trip-summary").innerHTML = tripSummary;
 
 }
