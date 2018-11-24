@@ -260,6 +260,12 @@
                     <h1>Trips from Region to Region</h1>
 
                     <div id="space">
+                        <strong>Region/Station:  </strong><span id = 'region'></span><br>
+                        <strong>Number of Rides:  </strong><span id = 'num'></span><br>
+                        <strong>Inbounds:  </strong><span id = 'inbounds'></span><br>
+                        <strong>Outbounds: </strong><span id = 'outbounds'></span><br>
+                        <strong>Round Trip:  </strong><span id = 'round'></span><br>
+
                     </div>
                     <div id="chord1">
                     </div>
@@ -268,8 +274,8 @@
                     <h1>Trips from Station to Station</h1>
 
                     <div id="drop-down">
-                        Region:
-                        <select class="select-box" id="region-drop">
+                        <strong>Region: </strong>
+                        <select class="select-box" id="region-drop" onchange="updateStations()">
                             <option value="Total" selected="selected">Total</option>
                             <option value="Boston">Boston</option>
                             <option value="Brookline">Brookline</option>
@@ -280,13 +286,13 @@
                         <br>
                         <br>
 
-                        Top
-                        <select class="select-box" id="region-drop">
+                        <strong>Top</strong>
+                        <select class="select-box" id="rank-drop" onchange="updateStations()">
                             <option value="5" selected="selected">5</option>
                             <option value="10">10</option>
 
                         </select>
-                        Stations
+                        <strong>Stations</strong>
                     </div>
                     <div id="chord2">
                     </div>

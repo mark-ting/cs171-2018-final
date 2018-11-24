@@ -11,7 +11,6 @@ chordDiagram = function(_parentElement, _data, _region){
 chordDiagram.prototype.initVis = function() {
     var vis = this;
 
-    // $("#"+vis.parentElement).empty();
     vis.margin = { top: 60, right: 60, bottom: 30, left: 60};
     vis.width = $("#"+vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 500 - vis.margin.top - vis.margin.bottom;
@@ -21,14 +20,13 @@ chordDiagram.prototype.initVis = function() {
     vis.outerRadius = vis.innerRadius * 1.2;
 
     vis.colorScheme = d3.schemeSet2;
-    vis.opacityDefault = 0.9;
+    vis.opacityDefault = 0.95;
 
     vis.colorScale = d3.scaleOrdinal()
-        // .domain(d3.range(vis.names.length))
         .range(vis.colorScheme);
 
     vis.chord = d3.chord()
-        .padAngle(.01)
+        .padAngle(0)
         .sortChords(d3.descending);
 
     vis.arc = d3.arc()
@@ -118,6 +116,7 @@ chordDiagram.prototype.wrangleData = function(){
     } else{
 
         var regionSelection = d3.select("#region-drop").property("value");
+        var rankSelection = +d3.select('#rank-drop').property("value");
 
         if(regionSelection != 'Total'){
             vis.displayData = vis.data.filter(function(d){
@@ -156,12 +155,12 @@ chordDiagram.prototype.wrangleData = function(){
 
         var i = 0;
         for (let [key, value] of vis.station_count) {
-            if(i == 5){
+            if(i == rankSelection){
                 break;
             }
             vis.top_stations.push(key);
             i ++;
-        };
+        }
 
         //filter data by the top 5 stations
         vis.top_data = vis.displayData.filter(function (d) {
@@ -213,22 +212,8 @@ chordDiagram.prototype.updateVis = function () {
         .attr("class", "d3-tip-chord")
         .offset([0, 5])
         .html(function(d) {
-            var result = vis.nameByIndex.get(d.index)+"<br/>";
 
-            //compute total num of rides
-            var totalRides = 0;
-            for(var i = 0; i < vis.matrix[0].length; i ++){
-                totalRides += vis.matrix[d.index][i];
-            }
-
-            for(var i = 0; i < vis.matrix.length; i ++){
-                totalRides += vis.matrix[i][d.index];
-            }
-
-            totalRides -= vis.matrix[d.index][d.index];
-
-            result += 'number of rides: ' + totalRides + '<br/>';
-            return result;
+            return vis.nameByIndex.get(d.index)+ "<br/>";
         });
 
     vis.svg.call(vis.tip);
@@ -256,6 +241,11 @@ chordDiagram.prototype.updateVis = function () {
 
             vis.tip.show(d);
 
+            d3.select(this)
+                // .style("fill", 'grey')
+                .style('stroke', 'white')
+                .style('stroke-width', 6);
+
             vis.svg.selectAll("path.chord")
                 .filter(function(d) { return d.source.index != i && d.target.index != i; })
                 .transition()
@@ -264,13 +254,63 @@ chordDiagram.prototype.updateVis = function () {
         .on("mouseout", function(d,i) {
             vis.tip.hide(d);
 
+            d3.select(this)
+                // .style("fill", function(d) { return vis.colorScale(d.index); })
+                .style("stroke", 'transparent');
+
             vis.svg.selectAll("path.chord")
                 .filter(function (d) {
                     return d.source.index != i && d.target.index != i;
                 })
                 .transition()
                 .style("opacity", vis.opacityDefault);
-        });
+        })
+        .on('click', function(d, i){
+
+            //compute total num of rides
+            var totalRides = 0;
+            var inbounds = 0;
+            var outbounds = 0;
+            var roundTrip = 0;
+            for(var i = 0; i < vis.matrix[0].length; i ++){
+                totalRides += vis.matrix[d.index][i];
+                outbounds += vis.matrix[d.index][i];
+            }
+
+            for(var i = 0; i < vis.matrix.length; i ++){
+                totalRides += vis.matrix[i][d.index];
+                inbounds += vis.matrix[i][d.index];
+            }
+
+            roundTrip = vis.matrix[d.index][d.index]
+            totalRides -= roundTrip;
+
+
+            document.getElementById("region").innerHTML = vis.nameByIndex.get(d.index);
+            document.getElementById("num").innerHTML = totalRides;
+            document.getElementById("inbounds").innerHTML = inbounds;
+            document.getElementById("outbounds").innerHTML = outbounds;
+            document.getElementById("round").innerHTML = roundTrip;
+
+
+            if(vis.region == true){
+                var click_region = vis.nameByIndex.get(d.index);
+                if(click_region == 'Boston'){
+                    document.getElementById("region-drop").selectedIndex = "1";
+                } else if(click_region == 'Brookline'){
+                    document.getElementById("region-drop").selectedIndex = "2";
+                } else if(click_region == 'Cambridge'){
+                    document.getElementById("region-drop").selectedIndex = "3";
+                } else if(click_region == 'Somerville'){
+                    document.getElementById("region-drop").selectedIndex = "4";
+                }
+
+                updateStations();
+            }
+        })
+        .transition()
+        .duration(1000)
+        .ease(d3.easeCubicOut);
 
 
     vis.outerArcs.exit().remove();
@@ -282,6 +322,9 @@ chordDiagram.prototype.updateVis = function () {
     vis.paths.enter().append("path")
         .attr("class", "chord")
         .merge(vis.paths)
+        .transition()
+        .duration(1000)
+        .ease(d3.easeCubicOut)
         .style("fill", function(d) {
             return vis.colorScale(d.source.index); })
         .style("opacity", vis.opacityDefault)

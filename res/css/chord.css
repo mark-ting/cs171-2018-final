@@ -1,6 +1,21 @@
 #drop-down{
+    font-family: Verdana;
+    font-size: 15px;
+    padding-top: 20px;
     text-align: center;
+    height: 100px;
 }
+
+
+#space{
+    font-family: Verdana;
+    font-size: 15px;
+    padding-top: 20px;
+    text-align: center;
+    height: 100px;
+}
+
+
 
 
 .d3-tip-chord {
