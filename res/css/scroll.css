@@ -4,7 +4,8 @@ nav {
 
 header,
 section {
-  height: 100vh;
+padding-bottom: 5%;
+padding-top: 5%;
 }
 
 .row, .container-fluid {
