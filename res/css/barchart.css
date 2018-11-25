@@ -28,56 +28,56 @@
     left: 0;
 }
 
-h2 {
+/*h2 {
     font-size: 28px;
     font-family: Courier;
     margin-left: 30px;
-}
+}*/
 
 
-.bar-choice {
+/*.bar-choice {
     font-family: "Comic Sans MS";
     font-size: 16px;
     padding-bottom: 2px;
-}
+}*/
 
 #station {
     width: 50%;
 }
 
-#freq-cat {
+/*#freq-cat {
     margin-top: 15px;
     font-size: 18px;
     margin-bottom: 3px;
-}
+}*/
 
 #data-freq {
     margin-right: 3px;
 }
 
 #notation {
-    font-size: 12px;
+/*    font-size: 12px;*/
     margin-left: 30px;
 }
 
 #change-sorting {
-    font-size: 14px;
+/*    font-size: 14px;*/
     margin-left: 30px;
 }
 
-.title {
+/*.title {
     font-size: 14px;
     font-family: Courier;
-}
+}*/
 
-#unavailable {
+#unavailable {/*
     font-size: 18px;
-    font-family: Arial;
+*//*    font-family: Arial;*/
     margin: 50px 30px 50px 30px;
 }
 
 #trip-summary {
-    font-size: 18px;
-    font-family: Arial;
+/*    font-size: 18px;*/
+/*    font-family: Arial;*/
     margin: 50px 70px 0 5px;
 }
