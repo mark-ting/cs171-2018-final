@@ -12,7 +12,7 @@ table td:nth-child(1) {
 }
 
 circle.station {
-  fill: rgb(23, 73, 172);
+  fill: #1F8CFF;
   fill-opacity: 0.7;
   stroke-opacity: 1;
 }
