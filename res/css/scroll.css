@@ -2,12 +2,6 @@ nav {
   margin-bottom: 10vh;
 }
 
-header,
-section {
-padding-bottom: 5%;
-padding-top: 5%;
-}
-
 .row, .container-fluid {
   height: 100%;
 }
