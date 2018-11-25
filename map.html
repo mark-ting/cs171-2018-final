@@ -18,7 +18,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8">
-                    <div id="map-area"></div>
+                    <div id="map-area">
+                    </div>
                 </div>
                 <div class="col-lg-4">
                     <h3><span id="sidebar-station">#station</span></h3>
@@ -39,6 +40,24 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    <h5>Rider Demographics</h5>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Female</td>
+                                <td><span id="sidebar-station-demo-f">-</span></td>
+                            </tr>
+                            <tr>
+                                <td>Male</td>
+                                <td><span id="sidebar-station-demo-m">-</span></td>
+                            </tr>
+                            <tr>
+                                <td>Unknown</td>
+                                <td><span id="sidebar-station-demo-u">-</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -49,7 +68,8 @@
     <script src="vendor/bootstrap/bootstrap.min.js"></script>
     <script src="vendor/d3/d3.min.js"></script>
 
-    <script src="vendor/leaflet/leaflet.js"></script>
+    <script src="vendor/leaflet/leaflet-src.js"></script>
+    <script src="res/js/DataService.js"></script>
     <script src="res/js/StationMap.js"></script>
     <script src="res/js/map.js"></script>
 </body>

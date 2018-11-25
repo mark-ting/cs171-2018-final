@@ -10,3 +10,9 @@ table td:nth-child(1) {
   font-weight: bold;
   width: 300px;
 }
+
+circle.station {
+  fill: rgb(23, 73, 172);
+  fill-opacity: 0.7;
+  stroke-opacity: 1;
+}

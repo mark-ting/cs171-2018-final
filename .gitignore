@@ -6,3 +6,7 @@ node_modules/
 # avoid commiting large datasets
 res/data/merged.csv
 res/data/trips_2015.csv
+res/data/Hubway_Stations_as_of_July_2017.csv
+res/data/Hubway_Stations_2011_2016.csv
+res/data/hubway_Trips_2015.csv
+res/data/station_trips_2011.csv
