@@ -17,16 +17,16 @@
 
 </head>
 
-<body id="page-top">
-    <section>
+<body id="page-top" background="images/bostonmap.jpg">
+    <section id="begin" class="non-vis">
         <div class="container-fluid text-center">
-            <h1>The Life of a Blue Bike</h1>
-
-            <!--<embed src="http://www.vicsteinman.com/wp-content/uploads/2018/08/BCBS_BOD_BlueBikes_2018_V6.mp4" autostart="true"-->
-            <!--height="80%" width="80%" />-->
 
             <div class="bodytext">
-
+                <br>
+                <p class="intro">Team Blue Riders presents:</p>
+                <br>
+                <img src="images/bikemo.gif" id="bikemo" alt="bikemovie" style="width:100%">
+                <h1>The Life of a Blue Bike</h1>
                 <text> We are Blue Bikes. We are everywhere in the Greater Boston Area. Find us parked at our docks
                     near
                     your workplace, home, or school! Take us with you on your next adventure. As of May 2017, there
@@ -39,9 +39,9 @@
 
     <br>
 
-    <section id="about">
+    <section id="about" class="non-vis">
         <div class="container-fluid text-center">
-            <div class="non-vis">
+            <div>
                 <h1>The Birth of Blue Bikes</h1>
 
                 <div class="bodytext">
@@ -60,52 +60,76 @@
 
                     <p> Click on the parts of the tree to go to the official website.</p>
                 </div>
+                <br>
 
-                <div class="row">
-                    <div class="col-3">
+                <div class="row column-city">
+                    <div class="col-md-2 col-md-offset-1">
                         <a href="https://www.boston.gov">
-                            <img src="images/boston.png" alt="boston" style="width:12vw">
+                            <img src="images/boston.png" alt="boston" style="width:10vw">
                         </a>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-md-2">
                         <a href="http://www.cambridge.id.gov">
-                            <img src="images/cambridge.jpg" alt="cambridge" style="width:12vw">
+                            <img src="images/cambridge.jpg" alt="cambridge" style="width:10vw">
                         </a>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-md-2">
                         <a href="https://www.somervillema.gov">
-                            <img src="images/somerville.png" alt="somerville" style="width:12vw">
+                            <img src="images/somerville.png" alt="somerville" style="width:10vw">
                         </a>
                     </div>
-
-                    <div class="col-3">
+                    <div class="col-md-2">
                         <a href="https://www.brooklinema.gov/">
-                            <img src="images/brookline.jpg" alt="brookline" style="width:12vw">
+                            <img src="images/brookline.jpg" alt="brookline" style="width:10vw">
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="https://home.bluecrossma.com/?nichn=Google&nicam=HealthInsuranceBrand&niseg=Brand-Exact&nipkw=bluecrossblueshieldma&gclid=EAIaIQobChMIlfWNw_zv3gIVW4GzCh0EeQynEAAYASAAEgJ15PD_BwE">
+                            <img src="images/BCBS.jpg" alt="blue cross blue shield" style="width:10vw">
                         </a>
                     </div>
                 </div>
+                <br>
 
                 <div class="row">
-                    <div class="col-12 mx-auto">
-                        <img src="images/ph.jpg" class="mx-auto d-block" style="width:70%">
+                    <div class="col-12">
+                        <img src="images/curlybracket.png" style="width:50vw">
                     </div>
                 </div>
-            </div>
+
+                <div class="row intro" style="align-self:center">
+                    <div class="col-md-4 col-md-offset-1">
+                        <a href="https://www.motivateco.com/">
+                        <img src="images/motivate.jpg" class="mx-auto d-block" style="width:18vw">
+                    </a>
+                    </div>
+                    <div class="col-md-1">
+                            <img src="images/plus.png" alt="plus" style="width:3vw">
+                    </div>
+                    <div class="col-md-3">
+                        <a href="http://www.8d.com">
+                        <img src="images/8D.png" class="mx-auto d-block" style="width:18vw">
+                    </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="https://www.pbsc.com">
+                        <img src="images/PBSC.png" class="mx-auto d-block" style="width:10vw">
+                    </a>
+                    </div>
+                </div>
+
         </div>
     </section>
     <br>
 
-    <section id="map">
-        <div class="container-fluid vis">
+    <section id="map" class="vis">
+        <div class="container-fluid">
             <h1>Where Do We Live?</h1>
-            <p class="h2">Map of all Blue Bikes Stations in the Greater Boston Area</p>
-            <div id="map-area"></div>
-            <h3>
-                <span id="sidebar-station">-</span>
-            </h3>
-            <small><span id="sidebar-station-municipality">-</span> (ID: <span id="sidebar-station-id">#</span>)</small>
+                <div class="bodytext">
+                    <p> We stay docked at stations around Boston, Brookline, Cambridge and Somerville. Take us for a quick one-way trip or a leisurely ride around town. Commute to work or school, run errands and explore the city. At the end of your journey, return your Blue Bike to any station. Slide the us firmly into an empty dock and wait for the green light to make sure the lock is fully engaged. See the map below to find out where we are! </p>
+                <br>
             <table class="table">
                 <tbody>
                     <tr>
@@ -122,6 +146,23 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
+
+            <p class="h2">Map of all Blue Bikes Stations in the Greater Boston Area</p>
+            <div id="map-area"></div>
+            <h3>
+                <span id="sidebar-station">-</span>
+            </h3>
+            <small><span id="sidebar-station-municipality">-</span> (ID: <span id="sidebar-station-id">#</span>)</small>
+        </div>
+     </section>
+    <br>
+
+    <section id="tables" class="vis">
+        <div class="bodytext">
+            <h1>How Do We Save the Environment?</h1>
+
+                    <p> Not only do we help people of all ages and genders get around, we can also help save fuel and time. Change the drop down options below to see who our most frequent riders are, and the impact they have had on the environment. </p>
 
             <h5>Rider Demographics</h5>
             <table class="table">
@@ -140,15 +181,18 @@
                     </tr>
                 </tbody>
             </table>
+
+            <h3>Environmental Component Upcoming</h3>
+                    
         </div>
     </section>
     <br>
 
-    <section id="services">
-        <div class="container-fluid non-vis">
+    <section id="services" class="non-vis">
+        <div class="container-fluid">
             <h1>The Army of Blue Bikes</h1>
 
-            <div class="row" align="center">
+            <div class="row" align="right">
                 <div class="col-md-6">
                     <br>
                     <div id="carouselExampleControls" id="army" class="carousel slide" data-ride="carousel">
@@ -176,37 +220,22 @@
 
                 <div class="col-md-6">
                     <div class="bodytext">
-                        <p class="h2">A Look at How We Have Grown</p>
+                        <p class="h2">Our Growth and Identity</p>
                         <br>
 
-                        <p>Hubway became operational on July 28, 2011, with an event in which members could ride
-                            bicycles from City Hall Plaza to a designated bicycle station. On March 15, 2012, Hubway
-                            was relaunched for the season with the abutting communities of Brookline, Cambridge, and
-                            Somerville also joining. By the end of the 2012 season on November 28, the system had 105
-                            stations and 1,050 bikes. While a majority of the stations continued to be shut down for
-                            the winter season over the first years of the program, 25 stations in Cambridge remained
-                            open during a successful winter pilot program which became permanent. After the full system
-                            relaunched on April 2, 2014, it grew to 140 stations and over 1,300 bikes.</p>
+                        <p>Hubway became operational on July 28, 2011, launching in the communities of Brookline, Cambridge, and
+                            Somerville on March 15, 2012. By the end of the 2012 season on November 28, the system had 105
+                            stations and 1,050 bikes. After the full system relaunched on April 2, 2014, it grew to 140 stations and over 1,300 bikes.</p>
 
-                        <p>Full system operations for 2014 concluded on November 26, though the system expanded its
-                            winter operations. For the second year, almost all Cambridge-based stations remained open
-                            year-round, and those stations were joined by 62 Boston-based stations that remained open
-                            through December 31, 2014. Inclement weather pushed back the full system reopening until
-                            April 17, 2015, and during the 2015 season the system grew to 155 stations and over 1,500
-                            bicycles. </p>
-
-                        <!--                         <p>In 2015, regular
-                        season operations concluded on November 25, though again Hubway expanded its winter operations
-                        further, with 110 stations remaining open through December 7, 2015; of those, 107 stayed open
-                        through December 31; and of those, the 37 Cambridge-based stations once again remain open
-                        year-round.In May 2017, Boston Mayor Marty Walsh announced a planned two-year expansion, adding
-                        70 new stations and offering year-round service.</p>
+                        <p>Inclement weather pushed back another full system reopening in 2015 until
+                            April 17, and during the 2015 season, the system grew to 155 stations and over 1,500
+                            bicycles. Hubway expanded its winter operations further, with 110 stations remaining open through December 7, 2015. In May 2017, Boston Mayor Marty Walsh announced a planned two-year expansion, adding 70 new stations and offering year-round service.</p>
 
                     <p>On March 7, 2018, Hubway announced a six-year partnership with Blue Cross Blue Shield of
                         Massachusetts, which included a system-wide re-branding as Blue Bikes, along with expanding the
                         system to 3,000 bikes and adding over 100 new stations by the end of 2019. The new sponsorship
                         with Blue Cross covers all four municipalities. The name change took effect on May 9, 2018, with
-                        the release of new and re-branded bicycles.</p> -->
+                        the release of new and re-branded bicycles.</p>
                     </div>
                 </div>
             </div>
@@ -214,14 +243,21 @@
     </section>
     <br>
 
-    <section id="trip-duration">
+    <section id="trip-duration" class="vis">
         <div class="container-fluid vis">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+                    <div class="bodytext">
                     <h1>Where Do We Go?</h1>
+                    <p > Every week is different for us. Our riders take sometimes take us for short rides, or long adventures. See how many trips we take each month, each week, and how long our riders keep us by changing the menus on the right. 
+                    </p>
+                    <br> 
                     <h2>Trip Duration and Distance</h2>
+                </div>
+
+
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-8">
                             <button type="button" class="btn btn-default" id="change-sorting">
                                 <span class="glyphicon glyphicon-sort"></span>
                                 Sort
@@ -235,7 +271,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-5 bar-choice">
+                        <div class="col-md-4 bar-choice">
                             <div id="freq-cat">
                                 <select class="select-box" id="data-freq" onchange="changeFrequency()">
                                     <option value="week" selected="selected">Weekly</option>
@@ -271,7 +307,7 @@
                                     <option value="12">December</option>
                                 </select>
                             </div>
-                            <div id="trip-summary"></div>
+                            <div class="bodytext" id="trip-summary"></div>
                         </div>
                     </div>
                 </div>
@@ -280,7 +316,7 @@
     </section>
     <br>
 
-    <section id="contact">
+    <section id="contact" class="vis">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-5 mx-auto">
@@ -329,7 +365,7 @@
     </section>
     <br>
 
-    <section id="end">
+    <section id="end" class="non-vis">
         <div class="container-fluid">
             <h1>End of a Blue Bike</h1>
 
@@ -341,14 +377,19 @@
             </p>
             <br>
 
-            <ul class="bodytext">Sources
+            <ul class="bodytext">Sources and Additional Links
                 <li><a href="http://www.vicsteinman.com/project/bluebikes">Vic Steinman, Marketing for Blue Bikes</a></li>
                 <li><a href="https://www.bluebikes.com">Official Blue Bikes Website</a></li>
-                <li><a href="https://www.bostonmagazine.com/news/2018/07/02/lyft-blue-bikes/">Lyft to Acquire Motivate</a>
-                </li>
+                <li><a href="https://www.bostonmagazine.com/news/2018/07/02/lyft-blue-bikes/">Lyft to Acquire Motivate</a></li> 
+                <li><a href="http://motivateco.com">Motivate Company</a></li>
+                <li><a href="https://home.bluecrossma.com/?nichn=Google&nicam=HealthInsuranceBrand&niseg=Brand-Exact&nipkw=bluecrossblueshieldma&gclid=EAIaIQobChMIlfWNw_zv3gIVW4GzCh0EeQynEAAYASAAEgJ15PD_BwE">Blue Cross Blue Shield</a></li>
+                <li><a href="http://www.8d.com">8D Technologies</a></li>
+                <li><a href="https://www.pbsc.com">PBSC Urban Solutions</a></li>
+
             </ul>
         </div>
     </section>
+    <br>
 
 
     <!-- Footer -->
