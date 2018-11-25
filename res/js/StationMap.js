@@ -130,9 +130,8 @@ class StationMap {
     this.updateSidebar(station)
   }
 
-  // TODO: update with new data format
   // TODO: dynamic binding to sidebar object
-  updateSidebar(station) {
+  async updateSidebar(station) {
     // Skip if station invalid
     if (station === undefined || station === null) {
       return
@@ -143,11 +142,18 @@ class StationMap {
       return
     }
 
+    const demographics = await this.dataService.get('demographics', {
+      'station': station.id
+    })
+
     $('#sidebar-station').text(station['name'])
     $('#sidebar-station-municipality').text(station['municipality'])
     $('#sidebar-station-id').text(station['id'])
     $('#sidebar-station-docks').text(station['docks'])
     // $('#sidebar-station-outgoing').text(station['outgoing'])
     // $('#sidebar-station-incoming').text(station['incoming'])
+    $('#sidebar-station-demo-f').text(demographics['female'] || 0)
+    $('#sidebar-station-demo-m').text(demographics['male'] || 0)
+    $('#sidebar-station-demo-u').text(demographics['unknown'] || 0)
   }
 }
