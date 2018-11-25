@@ -110,6 +110,9 @@ class StationMap {
       })
 
     stationElements
+      .attr('fill', 'rgb(23, 73, 172)')
+      .attr('fill-opacity', 0.7)
+      .attr('stroke-opacity', 1)
       .attr('stroke-width', d => this.activeStation === d ? activeStrokeWidth : 0)
       .attr('r', d => {
         return 10

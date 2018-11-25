@@ -23,7 +23,7 @@
             <h1>The Life of a Blue Bike</h1>
 
             <!--<embed src="http://www.vicsteinman.com/wp-content/uploads/2018/08/BCBS_BOD_BlueBikes_2018_V6.mp4" autostart="true"-->
-                <!--height="80%" width="80%" />-->
+            <!--height="80%" width="80%" />-->
 
             <div class="bodytext">
 
@@ -111,6 +111,32 @@
                     <tr>
                         <td>No. of Docks</td>
                         <td><span id="sidebar-station-docks">-</span></td>
+                    </tr>
+                    <tr>
+                        <td>Outgoing Trips (as Origin)</td>
+                        <td><span id="sidebar-station-outgoing">-</span></td>
+                    </tr>
+                    <tr>
+                        <td>Incoming Trips (as Destination)</td>
+                        <td><span id="sidebar-station-incoming">-</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Rider Demographics</h5>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Female</td>
+                        <td><span id="sidebar-station-demo-f">-</span></td>
+                    </tr>
+                    <tr>
+                        <td>Male</td>
+                        <td><span id="sidebar-station-demo-m">-</span></td>
+                    </tr>
+                    <tr>
+                        <td>Unknown</td>
+                        <td><span id="sidebar-station-demo-u">-</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -204,7 +230,8 @@
                             <div id="notation">
                                 * More saturated color represents longer trip. <br>
                                 * If more than 20 bikes began their trip from this station during the selected period,
-                                only the top 20 bikes with the most number of trips starting from this station will be shown.
+                                only the top 20 bikes with the most number of trips starting from this station will be
+                                shown.
                             </div>
                         </div>
 
@@ -260,11 +287,11 @@
                     <h1>Trips from Region to Region</h1>
 
                     <div id="space">
-                        <strong>Region/Station:  </strong><span id = 'region'></span><br>
-                        <strong>Number of Rides:  </strong><span id = 'num'></span><br>
-                        <strong>Inbounds:  </strong><span id = 'inbounds'></span><br>
-                        <strong>Outbounds: </strong><span id = 'outbounds'></span><br>
-                        <strong>Round Trip:  </strong><span id = 'round'></span><br>
+                        <strong>Region/Station: </strong><span id='region'></span><br>
+                        <strong>Number of Rides: </strong><span id='num'></span><br>
+                        <strong>Inbounds: </strong><span id='inbounds'></span><br>
+                        <strong>Outbounds: </strong><span id='outbounds'></span><br>
+                        <strong>Round Trip: </strong><span id='round'></span><br>
 
                     </div>
                     <div id="chord1">
