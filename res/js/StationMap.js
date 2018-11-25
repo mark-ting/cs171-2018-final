@@ -9,51 +9,55 @@ const municipalitiesToIds = {
 }
 
 class StationMap {
-  constructor(mapElement, mapCenter, stations, sidebarElement) {
+  constructor(mapElement, mapCenter, dataService, sidebarElement) {
     this.mapElement = mapElement
     this.mapCenter = mapCenter
-    this.stations = stations
+    this.dataService = dataService
     this.sidebarElement = sidebarElement
 
+    this.prevStation = null
     this.activeStation = null
     this.init()
   }
 
   // Wrapper for chained initialization
-  init() {
+  async init() {
+    await this.loadData()
+
     this
-      .initIcons()
       .initMap()
-      .initLayers()
-      .updateMap()
+      .initSvgLayer()
+      .update()
   }
 
-  initIcons() {
-    const BaseIcon = L.Icon.extend({
-      options: {
-        iconAnchor: [13, 41],
-        popupAnchor: [0, -40],
-        shadowUrl: 'res/img/marker-shadow.png'
-      }
-    })
+  async loadData () {
+    const stationData = (await this.dataService.get('stations_with_trips')).stations
 
-    this.icons = {
-      blue: new BaseIcon({ iconUrl: 'res/img/marker-icon-blue.png' }),
-      orange: new BaseIcon({ iconUrl: 'res/img/marker-icon-orange.png' }),
-      purple: new BaseIcon({ iconUrl: 'res/img/marker-icon-purple.png' }),
-      red: new BaseIcon({ iconUrl: 'res/img/marker-icon-red.png' })
-    }
+    this.stations = stationData.map(s => {
+      const station = Object.assign(s, {
+        'latitude': +s['latitude'],
+        'longitude': +s['longitude'],
+        'LatLng': new L.LatLng(s['latitude'], s['longitude']),
+        'docks': +s['docks']
+      })
+      return station
+    })
 
     return this
   }
 
   initMap() {
-    this.map = L.map(this.mapElement).setView([this.mapCenter.Latitude, this.mapCenter.Longitude], 13)
+    this.map = L.map(this.mapElement)
+    this.map.setView([this.mapCenter.Latitude, this.mapCenter.Longitude], 13)
+    this.map.on('zoom moveend', () => {
+      this.update()
+    })
+
     return this
   }
 
-  initLayers() {
-    const defaultBase = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWF0MzA0OSIsImEiOiJjam9sdHB0NDgwdWNkM3ZtbzEzY3dldWNjIn0.4owqhToBPRWbdAfVz2FtIg', {
+  initSvgLayer() {
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWF0MzA0OSIsImEiOiJjam9sdHB0NDgwdWNkM3ZtbzEzY3dldWNjIn0.4owqhToBPRWbdAfVz2FtIg', {
       maxZoom: 18,
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -61,91 +65,89 @@ class StationMap {
       id: 'mapbox.streets'
     }).addTo(this.map)
 
-    this.base = {
-      "Default": defaultBase
-    }
-
-    this.overlays = {
-    }
-
-    // TODO: get municipalities externally
-    const municipalities = [...new Set(this.stations.map(s => s.Municipality))]
-    municipalities.forEach(m => {
-      this.overlays[m] = L.featureGroup().addTo(this.map)
+    const svgLayer = L.svg({
+      interactive: true,
+      bubblingMouseEvents: true,
+      pane: 'markerPane'
     })
+    svgLayer.addTo(this.map)
 
-    L.control.layers(this.base, this.overlays).addTo(this.map);
+    this.svg = d3.select('#' + this.mapElement).select('svg')
+    this.g = this.svg.select('g')
+
     return this
   }
 
-  updateMap() {
-    // Clear layers
-    for (const layerName in this.overlays) {
-      const overlayLayer = this.overlays[layerName]
-      overlayLayer.clearLayers()
-    }
+  update() {
+    const bounds = this.map.getBounds()
+    const drawable = this.stations.filter(s => bounds.contains(s.LatLng))
 
-    // Add stations
-    this.stations.forEach(s => {
-      let stationIcon
+    const stationElements = this.g.selectAll('circle')
+      .data(drawable)
 
-      // TODO: externalize municipality color coding
-      switch (s['Municipality']) {
-        case 'Boston':
-          stationIcon = this.icons.blue
-          break
+    stationElements.enter()
+      .append('circle')
+      .attr('class', 'station')
+      .attr("pointer-events", "all")
+      .on('mouseover', (d, i, q) => {
+        if (this.activeStation == d) {
+          return
+        }
 
-        case 'Brookline':
-          stationIcon = this.icons.orange
-          break
+        d3.select(q[i])
+          .attr('stroke', 'blue')
+          .attr('stroke-width', '2')
+      })
+      .on('mouseout', (d, i, q) => {
+        if (this.activeStation == d) {
+          return
+        }
 
-        case 'Cambridge':
-          stationIcon = this.icons.purple
-          break
+        d3.select(q[i])
+          .attr('stroke-width', '0')
+      })
+      .on('click', (d, i ,q) => {
+        d3.select(q[i])
+        .attr('stroke', 'green')
+        .attr('stroke-width', '2')
 
-        case 'Somerville':
-          stationIcon = this.icons.red
-          break
-      }
-
-      const stationMarker = L.marker([s.Latitude, s.Longitude], {
-        icon: stationIcon
-      }).addTo(this.overlays[s.Municipality])
-
-      // Bind station to marker
-      stationMarker['station'] = s
-
-      const stationText = (
-        `<b>${s['Station']}</b><br>` +
-        `Docks: ${s['# of Docks']}`
-      )
-
-      stationMarker
-        .bindPopup(stationText)
-        .openPopup()
-
-      stationMarker.on('click', (e) => {
-        const station = e.target.station
-        this.updateSidebar(station)
+        this.setActiveStation(d)
       })
 
-    })
-    return this
+    stationElements
+      .attr('r', 10)
+      .attr('transform', d => {
+        const t = this.map.latLngToLayerPoint(d.LatLng)
+        return `translate(${t.x}, ${t.y})`
+      })
+
+    stationElements.exit()
+      .remove()
+  }
+
+  setActiveStation(station) {
+    this.activeStation = station
+    this.updateSidebar(station)
   }
 
   // TODO: update with new data format
   // TODO: dynamic binding to sidebar object
   updateSidebar(station) {
+    // Skip if station invalid
+    if (station === undefined || station === null) {
+      return
+    }
+
     // Skip if no sidebar defined
     if (this.sidebarElement === undefined || this.sidebarElement === null) {
       return
     }
 
-    $('#sidebar-station').text(station['Station'])
-    $('#sidebar-station-municipality').text(station['Municipality'])
-    $('#sidebar-station-id').text(station['Station ID'])
-    $('#sidebar-station-docks').text(station['# of Docks'])
-    $('#sidebar-station-outgoing').text(station['outgoing'])
-    $('#sidebar-station-incoming').text(station['incoming'])
+    $('#sidebar-station').text(station['name'])
+    $('#sidebar-station-municipality').text(station['municipality'])
+    $('#sidebar-station-id').text(station['id'])
+    $('#sidebar-station-docks').text(station['docks'])
+    // $('#sidebar-station-outgoing').text(station['outgoing'])
+    // $('#sidebar-station-incoming').text(station['incoming'])
   }
 }
