@@ -11,6 +11,8 @@ chordDiagram = function(_parentElement, _data, _region){
 chordDiagram.prototype.initVis = function() {
     var vis = this;
 
+    $("#"+vis.parentElement).empty();
+
     vis.margin = { top: 60, right: 60, bottom: 30, left: 60};
     vis.width = $("#"+vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 500 - vis.margin.top - vis.margin.bottom;

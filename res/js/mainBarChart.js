@@ -88,6 +88,10 @@ d3.csv('res/data/trips_2015.csv')
             tripBarChart.initVis();
         });
 
+        window.addEventListener("resize", function(){
+            tripBarChart.initVis();
+        });
+
 
     });
 

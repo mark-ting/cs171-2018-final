@@ -17,6 +17,11 @@ d3.csv('res/data/merged.csv')
 
         chord2 = new chordDiagram("chord2", data, false);
 
+        window.addEventListener("resize", function(){
+            chord1.initVis();
+            chord2.initVis();
+        });
+
 
     });
 
