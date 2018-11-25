@@ -1,13 +1,5 @@
 /*global L */
 
-// TODO: get municipalities externally
-const municipalitiesToIds = {
-  'Boston': 0,
-  'Brookline': 1,
-  'Cambridge': 2,
-  'Somerville': 3
-}
-
 class StationMap {
   constructor(mapElement, mapCenter, dataService, sidebarElement) {
     this.mapElement = mapElement
@@ -30,7 +22,8 @@ class StationMap {
       .update()
   }
 
-  async loadData () {
+  // Load initial station data
+  async loadData() {
     const stationData = (await this.dataService.get('stations_with_trips')).stations
 
     this.stations = stationData.map(s => {
@@ -78,25 +71,27 @@ class StationMap {
     return this
   }
 
-  update() {
+  async update() {
     const bounds = this.map.getBounds()
     const drawable = this.stations.filter(s => bounds.contains(s.LatLng))
 
     const stationElements = this.g.selectAll('circle')
       .data(drawable)
 
+    const activeStrokeWidth = 4
+
     stationElements.enter()
       .append('circle')
       .attr('class', 'station')
-      .attr("pointer-events", "all")
+      .attr('pointer-events', 'all')
       .on('mouseover', (d, i, q) => {
         if (this.activeStation == d) {
           return
         }
 
         d3.select(q[i])
-          .attr('stroke', 'blue')
-          .attr('stroke-width', '2')
+          .attr('stroke', 'yellow')
+          .attr('stroke-width', activeStrokeWidth)
       })
       .on('mouseout', (d, i, q) => {
         if (this.activeStation == d) {
@@ -106,16 +101,19 @@ class StationMap {
         d3.select(q[i])
           .attr('stroke-width', '0')
       })
-      .on('click', (d, i ,q) => {
+      .on('click', (d, i, q) => {
         d3.select(q[i])
-        .attr('stroke', 'green')
-        .attr('stroke-width', '2')
+          .attr('stroke', 'cyan')
 
         this.setActiveStation(d)
+        this.update()
       })
 
     stationElements
-      .attr('r', 10)
+      .attr('stroke-width', d => this.activeStation === d ? activeStrokeWidth : 0)
+      .attr('r', d => {
+        return 10
+      })
       .attr('transform', d => {
         const t = this.map.latLngToLayerPoint(d.LatLng)
         return `translate(${t.x}, ${t.y})`
