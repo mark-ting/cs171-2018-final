@@ -3,7 +3,7 @@
     font-size: 15px;
     padding-top: 20px;
     text-align: center;
-    height: 100px;
+    height: 80px;
 }
 
 
@@ -12,9 +12,12 @@
     font-size: 15px;
     padding-top: 20px;
     text-align: center;
-    height: 100px;
+    height: 80px;
 }
 
+#chord-summary {
+    font-size: 15px;
+}
 
 
 
