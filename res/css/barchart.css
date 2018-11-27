@@ -79,5 +79,14 @@
 #trip-summary {
 /*    font-size: 18px;*/
 /*    font-family: Arial;*/
-    margin: 50px 70px 0 5px;
+    margin: 30px 10px 0 5px;
+}
+
+#bar-legend {
+    font-style: italic;
+    margin: 30px 10px 0 5px;
+}
+
+#summary-title{
+    font-weight: bold;
 }

@@ -58,7 +58,6 @@ var tripBarChart;
 
 
 
-
 d3.csv('res/data/trips_2015.csv')
     .then(function (tripData) {
         var station = {};

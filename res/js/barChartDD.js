@@ -49,6 +49,21 @@ barChart.prototype.initVis = function() {
         .attr("class", "d3-tip")
         .offset([-5, 0]);
 
+    vis.monthDict = {
+        '1': 'January',
+        '2': 'February',
+        '3': 'March',
+        '4': 'April',
+        '5': 'May',
+        '6': 'June',
+        '7': 'July',
+        '8': 'August',
+        '9': 'September',
+        '10': 'October',
+        '11': 'November',
+        '12': 'December'
+    };
+
     vis.wrangleData();
 }
 
@@ -213,7 +228,7 @@ barChart.prototype.updateVis = function () {
         .call(vis.yAxis);
 
 
-    var tripSummary = "";
+    var tripSummary = "<span id='summary-title'>Breif Summary:</span><br>";
     var numBikes = Object.keys(bikeInfo).length;
     if (numBikes==20) tripSummary += "More than 20 bikes started from ";
     else tripSummary += numBikes + " bikes started from ";
@@ -223,7 +238,7 @@ barChart.prototype.updateVis = function () {
         tripSummary += "week " + vis.timeSelection;
     }
     else {
-        tripSummary += vis.timeSelection;
+        tripSummary += vis.monthDict[vis.timeSelection];
     }
     tripSummary += ", totaling more than " + vis.totalDistance.toFixed(2) + " km and ";
     tripSummary += (vis.totalDuration/60).toFixed(2) + " minutes.";
