@@ -46,8 +46,6 @@ chordDiagram.prototype.initVis = function() {
 
 
 
-
-
     vis.wrangleData();
 }
 
@@ -113,7 +111,6 @@ chordDiagram.prototype.wrangleData = function(){
 
         });
 
-        // vis.displayData = vis.matrix;
 
     } else{
 
@@ -257,7 +254,6 @@ chordDiagram.prototype.updateVis = function () {
             vis.tip.hide(d);
 
             d3.select(this)
-                // .style("fill", function(d) { return vis.colorScale(d.index); })
                 .style("stroke", 'transparent');
 
             vis.svg.selectAll("path.chord")
@@ -330,7 +326,6 @@ chordDiagram.prototype.updateVis = function () {
         .style("fill", function(d) {
             return vis.colorScale(d.source.index); })
         .style("opacity", vis.opacityDefault)
-        // .style('stroke', 'black')
         .attr("d", vis.path);
 
 
