@@ -49,8 +49,11 @@ var chord2;
 
 
 
+
 d3.csv('res/data/trips_2015.csv')
     .then(function (tripData) {
+
+        console.log(tripData);
         // barchart
         var station = {};
         tripData.forEach(function (d) {
