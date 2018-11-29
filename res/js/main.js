@@ -41,6 +41,11 @@ function changeFrequency(){
     }
 }
 
+function updateStations(){
+    chord2.wrangleData();
+}
+
+
 fillWeek();
 
 // var proxy = "http://michaeloppermann.com/proxy.php?url=";
@@ -55,11 +60,17 @@ var tripBarChart;
 //     fillStation(station);
 // });
 
+var colorScheme = d3.schemeSet2;
+
+
+var chord1;
+var chord2;
 
 
 
 d3.csv('res/data/trips_2015.csv')
     .then(function (tripData) {
+        // barchart
         var station = {};
         tripData.forEach(function (d) {
             if(!(d.start_station_id in station)) station[d.start_station_id] = d.start_station;
@@ -91,6 +102,20 @@ d3.csv('res/data/trips_2015.csv')
             tripBarChart.initVis();
         });
 
+        // chord diagram
+        var tripData_filtered = tripData.filter(function (d) {
+            return (d.start_region!="") && (d.end_region!="");
+        });
+
+        chord1 = new chordDiagram("chord1", tripData_filtered, true);
+
+        chord2 = new chordDiagram("chord2", tripData_filtered, false);
+
+        window.addEventListener("resize", function(){
+            chord1.initVis();
+            chord2.initVis();
+        });
 
     });
+
 
