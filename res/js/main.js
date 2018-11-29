@@ -53,8 +53,6 @@ var chord2;
 // d3.csv('res/data/trips_2015.csv')
 d3.csv('https://media.githubusercontent.com/media/mat3049/cs171-2018-final/master/res/data/trips_2015.csv?raw=true')
     .then(function (tripData) {
-
-        console.log(tripData);
         // barchart
         var station = {};
         tripData.forEach(function (d) {
