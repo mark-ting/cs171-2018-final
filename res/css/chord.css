@@ -24,6 +24,13 @@
     font-size: 15px;
 }
 
+#chord1{
+    padding-top: 40px;
+}
+
+#chord2{
+    padding-top: 40px;
+}
 
 
 .d3-tip-chord {

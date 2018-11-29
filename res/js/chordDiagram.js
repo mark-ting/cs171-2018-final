@@ -18,7 +18,7 @@ chordDiagram.prototype.initVis = function() {
     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
 
-    vis.innerRadius = Math.min(vis.width, vis.height) * .45;
+    vis.innerRadius = Math.min(vis.width, vis.height) * .42;
     vis.outerRadius = vis.innerRadius * 1.2;
 
     vis.colorScheme = d3.schemeSet2;
@@ -194,6 +194,35 @@ chordDiagram.prototype.wrangleData = function(){
 
     }
 
+    //set default to Boston
+    if(vis.region == true){
+        var totalRides = 0;
+        var inbounds = 0;
+        var outbounds = 0;
+        var roundTrip = 0;
+        var boston_index = vis.indexByName.get('Boston');
+        for(var i = 0; i < vis.matrix[0].length; i ++){
+            totalRides += vis.matrix[boston_index][i];
+            outbounds += vis.matrix[boston_index][i];
+        }
+
+        for(var i = 0; i < vis.matrix.length; i ++){
+            totalRides += vis.matrix[i][boston_index];
+            inbounds += vis.matrix[i][boston_index];
+        }
+
+        roundTrip = vis.matrix[boston_index][boston_index]
+        totalRides -= roundTrip;
+
+
+        document.getElementById("region").innerHTML = vis.nameByIndex.get(boston_index);
+        document.getElementById("num").innerHTML = totalRides;
+        document.getElementById("inbounds").innerHTML = inbounds;
+        document.getElementById("outbounds").innerHTML = outbounds;
+        document.getElementById("round").innerHTML = roundTrip;
+    }
+
+
 
     vis.displayData = vis.data;
     vis.updateVis();
@@ -223,8 +252,9 @@ chordDiagram.prototype.updateVis = function () {
         .data(function(chords) { return chords.groups; });
 
 
-    vis.outerGroup = vis.outerArcs.enter().append("g");
 
+
+    vis.outerGroup = vis.outerArcs.enter().append("g");
 
 
 
@@ -309,6 +339,35 @@ chordDiagram.prototype.updateVis = function () {
         .transition()
         .duration(1000)
         .ease(d3.easeCubicOut);
+
+
+    //
+    if(vis.region == true) {
+        vis.outerGroup.append("text")
+            .attr("xlink:href", function (d) {
+                return "#group" + d.index;
+            })
+            .attr("dy", '.4em')
+            .text(function (d) {
+                return vis.nameByIndex.get(d.index);
+            })
+            .style("color", "black")
+            .style('font-family', "Verdana")
+            .style('font-size', 12);
+
+        vis.outerGroup.select("text")
+            .attr("transform", function (d) {
+                d.angle = (d.startAngle + d.endAngle) / 2;
+                //store the midpoint angle in the data object
+                return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")" +
+                    " translate(" + (vis.innerRadius + 40) + ")" +
+                    (d.angle > Math.PI ? " rotate(180)" : " rotate(0)");
+                //include the rotate zero so that transforms can be interpolated
+            })
+            .attr("text-anchor", function (d) {
+                return d.angle > Math.PI ? "end" : "begin";
+            });
+    }
 
 
     vis.outerArcs.exit().remove();
