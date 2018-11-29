@@ -1,13 +1,4 @@
 
-
-// function fillStation(stationData) {
-//     var result = "<option value='"+stationData[0].id+"' selected='selected'>"+stationData[0].name+"</option>";
-//     for(var i=1; i<stationData.length; i++){
-//         result += "<option value='"+stationData[i].id+"'>"+stationData[i].name+"</option>";
-//     }
-//     document.getElementById("station").innerHTML = result;
-// }
-
 function fillStation(stationData) {
     var result = "";
     var count = 0;
@@ -48,18 +39,8 @@ function updateStations(){
 
 fillWeek();
 
-// var proxy = "http://michaeloppermann.com/proxy.php?url=";
-// var stationUrl = "http://vps77598.vps.ovh.ca/bluebikes/stations.php"
-// var tripUrl = "http://vps77598.vps.ovh.ca/bluebikes/rides.php?start=2015-05-25&end=2016-05-25"
 
 var tripBarChart;
-
-
-// $.getJSON(proxy+stationUrl, function(jsonData){
-//     var station = jsonData.stations;
-//     fillStation(station);
-// });
-
 var colorScheme = d3.schemeSet2;
 
 

@@ -25,16 +25,20 @@ barChart.prototype.initVis = function() {
 
     vis.x = d3.scaleLinear()
         .range([0, vis.width]);
-
     vis.y = d3.scaleBand()
         .rangeRound([vis.height, 0])
         .paddingInner(0.1);
 
     vis.yAxis = d3.axisLeft()
         .scale(vis.y);
+    vis.xAxis = d3.axisBottom()
+        .scale(vis.x);
 
     vis.svg.append("g")
         .attr("class", "y-axis axis");
+    vis.svg.append("g")
+        .attr("class", "x-axis axis")
+        .attr("transform", "translate(0," + vis.height + ")");
 
     vis.svg.append("g")
         .attr("class", "title")
@@ -226,6 +230,21 @@ barChart.prototype.updateVis = function () {
         .duration(1000)
         .ease(d3.easeCubicOut)
         .call(vis.yAxis);
+    vis.svg.select(".axis.x-axis")
+        .transition()
+        .duration(1000)
+        .ease(d3.easeCubicOut)
+        .call(vis.xAxis);
+
+    vis.svg.append("g")
+        .attr("class", "title")
+        .attr("fill", "black")
+        .attr("transform", "translate(" + (vis.width-2*vis.margin.right) + "," + (vis.height+vis.margin.bottom*5/6) + ")")
+        .append("text")
+        .text(function(){
+            if(infoType=='duration') return "Duration (seconds)";
+            else return "Distance (km)";
+        });
 
 
     var tripSummary = "<span id='summary-title'>Breif Summary:</span><br>";
