@@ -1,10 +1,10 @@
 # Team Blue Bikes #
 
 ## Repository Structure
-#### index.html
+#### 1. `index.html`
 The main html file containing website layout.
 
-#### res
+#### 2. `res` Directory
 - css: five css files (barchart.css, chord.css, map.css, scroll.css, and style.css) describing the style of html elements.
 - data: one csv file (trips_2015.csv) containing information of all blue bike trips in 2015, stored with Git Large File Storage.
 - img: icon pictures for map.
@@ -16,10 +16,10 @@ The main html file containing website layout.
 	* barChartDD.js: implementation of the bar chart
 	* chordDiagram.js: implementation of the chord diagrams
 
-#### vendor
+#### 3. `vendor` Directory
 Javascript libraries including bootstrap, d3-tip, d3 version 5, jquery easing, jquery, leaflet, popper and underscore.
 
-#### images
+#### 4. `images` Directory
 Image files we used on our website.
 
 ## Project Website
