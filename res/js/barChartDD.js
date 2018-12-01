@@ -47,7 +47,7 @@ barChart.prototype.initVis = function() {
         .append("text")
         .text("Bike ID");
 
-    vis.color = d3.scaleSequential(d3.interpolateGreens);
+    vis.color = d3.scaleSequential(d3.interpolatePuBu);
 
     vis.tip = d3.tip()
         .attr("class", "d3-tip")
