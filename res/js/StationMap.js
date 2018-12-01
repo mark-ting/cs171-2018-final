@@ -41,15 +41,7 @@ class StationMap {
 
   initMap() {
     this.map = L.map(this.mapElement)
-    this.map.setView([this.mapCenter.Latitude, this.mapCenter.Longitude], 13)
-    this.map.on('zoom moveend', () => {
-      this.update()
-    })
 
-    return this
-  }
-
-  initSvgLayer() {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWF0MzA0OSIsImEiOiJjam9sdHB0NDgwdWNkM3ZtbzEzY3dldWNjIn0.4owqhToBPRWbdAfVz2FtIg', {
       maxZoom: 18,
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -58,6 +50,16 @@ class StationMap {
       id: 'mapbox.streets'
     }).addTo(this.map)
 
+    this.map.setView([this.mapCenter.Latitude, this.mapCenter.Longitude], 13)
+
+    this.map.on('zoom moveend', () => {
+      this.update()
+    })
+
+    return this
+  }
+
+  initSvgLayer() {
     const svgLayer = L.svg({
       interactive: true,
       bubblingMouseEvents: true,
@@ -75,12 +77,11 @@ class StationMap {
     const bounds = this.map.getBounds()
     const drawable = this.stations.filter(s => bounds.contains(s.LatLng))
 
-    const stationElements = this.g.selectAll('circle')
-      .data(drawable)
-
     const activeStrokeWidth = 4
 
-    stationElements.enter()
+    this.g.selectAll('.station')
+      .data(drawable)
+      .enter()
       .append('circle')
       .attr('class', 'station')
       .attr('pointer-events', 'all')
@@ -104,12 +105,13 @@ class StationMap {
       .on('click', (d, i, q) => {
         d3.select(q[i])
           .attr('stroke', 'cyan')
+          .attr('stroke-width', activeStrokeWidth)
 
         this.setActiveStation(d)
         this.update()
       })
 
-    stationElements
+    this.g.selectAll('.station')
       .attr('fill', 'rgb(23, 73, 172)')
       .attr('fill-opacity', 0.7)
       .attr('stroke-opacity', 1)
@@ -122,7 +124,9 @@ class StationMap {
         return `translate(${t.x}, ${t.y})`
       })
 
-    stationElements.exit()
+    this.g.selectAll('.station')
+      .data(drawable)
+      .exit()
       .remove()
   }
 
