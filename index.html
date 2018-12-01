@@ -150,12 +150,12 @@
                             <td><span id="sidebar-station-docks">-</span></td>
                         </tr>
                         <tr>
-                            <td>Outgoing Trips (as Origin)</td>
-                            <td><span id="sidebar-station-outgoing">-</span></td>
+                            <td>Outbound Trips (as Origin)</td>
+                            <td><span id="sidebar-station-outbound">-</span></td>
                         </tr>
                         <tr>
-                            <td>Incoming Trips (as Destination)</td>
-                            <td><span id="sidebar-station-incoming">-</span></td>
+                            <td>Inbound Trips (as Destination)</td>
+                            <td><span id="sidebar-station-inbound">-</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -195,6 +195,31 @@
                     </tbody>
                 </table>
 
+                <h5>Distance Comparison</h5>
+                <small>From: <i><span id="comparison-start">-</span></i></small>
+                <br>
+                <small>To: <i><span id="comparison-end">-</span></i></small>
+                <table class="table">
+                    <tr>
+                        <th></th>
+                        <th>Driving</th>
+                        <th>Biking</th>
+                    </tr>
+                    <tr>
+                        <td>Distance</td>
+                        <td><span id="comparison-distance-driving">-</span></td>
+                        <td><span id="comparison-distance-biking">-</span></td>
+                    </tr>
+                    <tr>
+                        <td>Time</td>
+                        <td><span id="comparison-time-driving">-</span></td>
+                        <td><span id="comparison-time-biking">-</span></td>
+                    </tr>
+                    <tr>
+                        <td>Carbon Reduction*</td>
+                        <td colspan="2"><span id="comparison-emission">-</span></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </section>
