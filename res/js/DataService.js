@@ -20,7 +20,6 @@ class DataService {
     }
 
     const requestUrl = this.baseUrl + '/' + this.s(endpoint) + paramStr
-    console.log(requestUrl)
 
     try {
       const response = await fetch(requestUrl)
