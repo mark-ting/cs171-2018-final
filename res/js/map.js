@@ -12,7 +12,8 @@ async function renderMap() {
   // Attempt initialization
   try {
     const dataService = new DataService('http://vps77598.vps.ovh.ca/bluebikes', '.php')
-    const stationMap = new StationMap('map-area', Boston, dataService, 'map-sidebar')
+    const distanceService = new google.maps.DistanceMatrixService()
+    const stationMap = new StationMap('map-area', Boston, dataService, distanceService, 'map-sidebar')
   } catch (e) {
     console.warn('Error occurred while initialzing Leaflet/map.')
     console.warn(e)

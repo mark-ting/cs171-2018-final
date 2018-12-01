@@ -1,10 +1,11 @@
 /*global L */
 
 class StationMap {
-  constructor(mapElement, mapCenter, dataService, sidebarElement) {
+  constructor(mapElement, mapCenter, dataService, distanceService, sidebarElement) {
     this.mapElement = mapElement
     this.mapCenter = mapCenter
     this.dataService = dataService
+    this.distanceService = distanceService
     this.sidebarElement = sidebarElement
 
     this.prevStation = null
@@ -41,15 +42,7 @@ class StationMap {
 
   initMap() {
     this.map = L.map(this.mapElement)
-    this.map.setView([this.mapCenter.Latitude, this.mapCenter.Longitude], 13)
-    this.map.on('zoom moveend', () => {
-      this.update()
-    })
 
-    return this
-  }
-
-  initSvgLayer() {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWF0MzA0OSIsImEiOiJjam9sdHB0NDgwdWNkM3ZtbzEzY3dldWNjIn0.4owqhToBPRWbdAfVz2FtIg', {
       maxZoom: 18,
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -58,6 +51,16 @@ class StationMap {
       id: 'mapbox.streets'
     }).addTo(this.map)
 
+    this.map.setView([this.mapCenter.Latitude, this.mapCenter.Longitude], 13)
+
+    this.map.on('zoom moveend', () => {
+      this.update()
+    })
+
+    return this
+  }
+
+  initSvgLayer() {
     const svgLayer = L.svg({
       interactive: true,
       bubblingMouseEvents: true,
@@ -75,12 +78,11 @@ class StationMap {
     const bounds = this.map.getBounds()
     const drawable = this.stations.filter(s => bounds.contains(s.LatLng))
 
-    const stationElements = this.g.selectAll('circle')
-      .data(drawable)
-
     const activeStrokeWidth = 4
 
-    stationElements.enter()
+    this.g.selectAll('.station')
+      .data(drawable)
+      .enter()
       .append('circle')
       .attr('class', 'station')
       .attr('pointer-events', 'all')
@@ -104,12 +106,13 @@ class StationMap {
       .on('click', (d, i, q) => {
         d3.select(q[i])
           .attr('stroke', 'cyan')
+          .attr('stroke-width', activeStrokeWidth)
 
-        this.setActiveStation(d)
+        this.updateStationSelection(d)
         this.update()
       })
 
-    stationElements
+    this.g.selectAll('.station')
       .attr('fill', 'rgb(23, 73, 172)')
       .attr('fill-opacity', 0.7)
       .attr('stroke-opacity', 1)
@@ -122,19 +125,26 @@ class StationMap {
         return `translate(${t.x}, ${t.y})`
       })
 
-    stationElements.exit()
+    this.g.selectAll('.station')
+      .data(drawable)
+      .exit()
       .remove()
   }
 
-  setActiveStation(station) {
+  async updateStationSelection(station) {
+    if (this.activeStation === station) {
+      return
+    }
+
+    this.prevStation = this.activeStation
     this.activeStation = station
-    this.updateSidebar(station)
+    this.updateSidebar()
+    this.updateComparison()
   }
 
-  // TODO: dynamic binding to sidebar object
-  async updateSidebar(station) {
-    // Skip if station invalid
-    if (station === undefined || station === null) {
+  async updateSidebar() {
+    // Skip if no active station
+    if (this.activeStation === undefined || this.activeStation === null) {
       return
     }
 
@@ -143,18 +153,76 @@ class StationMap {
       return
     }
 
+    // Fetch demographic data
     const demographics = await this.dataService.get('demographics', {
-      'station': station.id
+      'station': this.activeStation.id
     })
 
-    $('#sidebar-station').text(station['name'])
-    $('#sidebar-station-municipality').text(station['municipality'])
-    $('#sidebar-station-id').text(station['id'])
-    $('#sidebar-station-docks').text(station['docks'])
-    // $('#sidebar-station-outgoing').text(station['outgoing'])
-    // $('#sidebar-station-incoming').text(station['incoming'])
+    // Fetch in/outbound data
+    const outbound = await this.dataService.get('outbound', {
+      'station': this.activeStation.id
+    })
+
+    const inbound = await this.dataService.get('inbound', {
+      'station': this.activeStation.id
+    })
+
+    // Process in/outbound data
+    let outboundTotal = 0
+    for (const [k, v] of Object.entries(outbound)) {
+      outbound[k] = +v
+      outboundTotal += +v
+    }
+
+    let inboundTotal = 0
+    for (const [k, v] of Object.entries(inbound)) {
+      inbound[k] = +v
+      inboundTotal += +v
+    }
+
+    $('#sidebar-station').text(this.activeStation['name'])
+    $('#sidebar-station-municipality').text(this.activeStation['municipality'])
+    $('#sidebar-station-id').text(this.activeStation['id'])
+    $('#sidebar-station-docks').text(this.activeStation['docks'])
+    $('#sidebar-station-outbound').text(outboundTotal)
+    $('#sidebar-station-inbound').text(inboundTotal)
     $('#sidebar-station-demo-f').text(demographics['female'] || 0)
     $('#sidebar-station-demo-m').text(demographics['male'] || 0)
     $('#sidebar-station-demo-u').text(demographics['unknown'] || 0)
+  }
+
+  async updateComparison() {
+    if (!this.prevStation || !this.activeStation) {
+      return
+    }
+
+    const drivingInfo = await this.getDistanceInfo(this.activeStation, this.prevStation, 'DRIVING')
+    const bikingInfo = await this.getDistanceInfo(this.activeStation, this.prevStation, 'BICYCLING')
+
+    $('#comparison-start').text(this.prevStation['name'])
+    $('#comparison-end').text(this.activeStation['name'])
+    $('#comparison-distance-driving').text(drivingInfo.distance.text)
+    $('#comparison-distance-biking').text(bikingInfo.distance.text)
+    $('#comparison-time-driving').text(drivingInfo.duration.text)
+    $('#comparison-time-biking').text(bikingInfo.duration.text)
+    $('#comparison-emission').html('~' + (drivingInfo.distance.value / 1609.34 * 404).toFixed(2) + 'g CO<sub>2</sub>')
+  }
+
+  async getDistanceInfo(a, b, mode) {
+    if (!a || !b) {
+      return
+    }
+
+    const request = new Promise((resolve, reject) => {
+      this.distanceService.getDistanceMatrix(
+        {
+          origins: [a.LatLng],
+          destinations: [b.LatLng],
+          travelMode: mode,
+          unitSystem: google.maps.UnitSystem.IMPERIAL,
+        }, resolve)
+    })
+
+    return (await request).rows[0].elements[0]
   }
 }
