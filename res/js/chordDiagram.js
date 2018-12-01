@@ -21,7 +21,7 @@ chordDiagram.prototype.initVis = function() {
     vis.innerRadius = Math.min(vis.width, vis.height) * .42;
     vis.outerRadius = vis.innerRadius * 1.2;
 
-    vis.colorScheme = d3.schemeSet2;
+    vis.colorScheme = d3.schemeSet1;
     vis.opacityDefault = 0.95;
 
     vis.colorScale = d3.scaleOrdinal()
