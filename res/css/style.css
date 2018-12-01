@@ -77,6 +77,10 @@ section {
     margin: auto;
 }
 
+.instructions {
+    font-weight: bold;
+}
+
 .army {
   padding-top: 100px;
 }

@@ -58,7 +58,7 @@
                         Bikes bicycle for an unlimited number of trips - up to 45 minutes each in duration. After 45
                         minutes, "overtime" fees of $2.50 per each 30 minute block of time are incurred.</p>
 
-                    <p> Click on the parts of the tree to go to the official website.</p>
+                    <p class="instructions"> Click on the parts of the tree to go to the official website.</p>
                 </div>
                 <br>
 
@@ -139,11 +139,22 @@
                 <p> We stay docked at stations around Boston, Brookline, Cambridge and Somerville. Take us for a quick
                     one-way trip or a leisurely ride around town. Commute to work or school, run errands and explore
                     the city. At the end of your journey, return your Blue Bike to any station. Slide the us firmly
-                    into an empty dock and wait for the green light to make sure the lock is fully engaged. See the map
-                    below to find out where we are! </p>
+                    into an empty dock and wait for the green light to make sure the lock is fully engaged. </p>
+
+                    <p class="instructions"> See the map
+                    below to find out where we are! Click on a station to see the number of trips and riders. </p>
                 <br>
 
-                <table class="table">
+
+        <div class="row">
+            <div class="col-md-8">
+                <p class="h2">Map of all Blue Bikes Stations in the Greater Boston Area</p>
+            <div id="map-area"></div>
+        </div>
+
+            <div class="col-md-4">
+        <h1>Docking Stations</h1>
+        <table class="table">
                     <tbody>
                         <tr>
                             <td>No. of Docks</td>
@@ -165,18 +176,12 @@
                 </h3>
                 <small><span id="sidebar-station-municipality">-</span> (ID: <span id="sidebar-station-id">#</span>)</small>
 
-
-                <p class="h2">Map of all Blue Bikes Stations in the Greater Boston Area</p>
-            </div>
-            <div id="map-area"></div>
-
-
-            <div class="bodytext">
                 <h1>Who Are Our Riders?</h1>
                 <p>While we are here for everyone, some people like to take us out more. See how this varies by area on
-                    the map above. Change the drop down options below to see who our most frequent riders are, by
-                    gender or age (upcoming). </p>
+                    the map above. </p>
 
+                <p class="instructions">Change the drop down options below to see who our most frequent riders are, by
+                    gender or age (upcoming). </p>
                 <h5>Rider Demographics</h5>
                 <table class="table">
                     <tbody>
@@ -194,8 +199,12 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
 
-                <h5>Distance Comparison</h5>
+                <h1>Distance Comparison</h1> 
+                <p class="instructions">Click on two stations to see comparative times between driving and biking, as well as the resulting carbon reduction. </p>
+                <br>
                 <small>From: <i><span id="comparison-start">-</span></i></small>
                 <br>
                 <small>To: <i><span id="comparison-end">-</span></i></small>
@@ -220,7 +229,7 @@
                         <td colspan="2"><span id="comparison-emission">-</span></td>
                     </tr>
                 </table>
-            </div>
+
         </div>
     </section>
     <br>
@@ -304,9 +313,10 @@
                         <p> Every week is different for us. Our riders sometimes take us for short rides, or long
                             adventures. Some months are busier than others; check out your favorite holidays, or see if
                             anyone is riding in the cold. Not only do we help people of all ages and genders get
-                            around, we can also help save fuel and time. Investigate how many trips we take, how long
+                            around, we can also help save fuel and time. 
+                        <p class="instructions">Investigate how many trips we take, how long
                             our riders keep us, and how that that reduces carbon emission and fuel use by changing the
-                            menus on the right.
+                            menus on the right.</p>
                         </p>
                         <br>
                     </div>
@@ -391,7 +401,9 @@
             <div class="bodytext">
                 <h1>Where Do We Go?</h1>
                 <p> There are some places that our riders love to take us, and some areas where we feel more
-                    welcome than others. Look at where we go by region, and station to station. Click on the
+                    welcome than others. Look at where we go by region, and station to station.</p> 
+
+                <p class="instructions"> Click on the
                     outer bars on each diagram to isolate only the trips from that segment.
                 </p>
                 <br>
