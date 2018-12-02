@@ -141,70 +141,72 @@
                     the city. At the end of your journey, return your Blue Bike to any station. Slide the us firmly
                     into an empty dock and wait for the green light to make sure the lock is fully engaged. </p>
 
-                    <p class="instructions"> See the map
+                <p class="instructions"> See the map
                     below to find out where we are! Click on a station to see the number of trips and riders. </p>
                 <br>
 
 
-        <div class="row">
-            <div class="col-md-8">
-                <p class="h2">Map of all Blue Bikes Stations in the Greater Boston Area</p>
-            <div id="map-area"></div>
-        </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="h2">Map of all Blue Bikes Stations in the Greater Boston Area</p>
+                        <div id="map-area"></div>
+                    </div>
 
-            <div class="col-md-4">
-        <h1>Docking Stations</h1>
-        <table class="table">
-                    <tbody>
-                        <tr>
-                            <td>No. of Docks</td>
-                            <td><span id="sidebar-station-docks">-</span></td>
-                        </tr>
-                        <tr>
-                            <td>Outbound Trips (as Origin)</td>
-                            <td><span id="sidebar-station-outbound">-</span></td>
-                        </tr>
-                        <tr>
-                            <td>Inbound Trips (as Destination)</td>
-                            <td><span id="sidebar-station-inbound">-</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <div class="col-md-4">
+                        <h1>Docking Stations</h1>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>No. of Docks</td>
+                                    <td><span id="sidebar-station-docks">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Outbound Trips (as Origin)</td>
+                                    <td><span id="sidebar-station-outbound">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Inbound Trips (as Destination)</td>
+                                    <td><span id="sidebar-station-inbound">-</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                <h3>
-                    <span id="sidebar-station">-</span>
-                </h3>
-                <small><span id="sidebar-station-municipality">-</span> (ID: <span id="sidebar-station-id">#</span>)</small>
+                        <h3>
+                            <span id="sidebar-station">-</span>
+                        </h3>
+                        <small><span id="sidebar-station-municipality">-</span> (ID: <span id="sidebar-station-id">#</span>)</small>
 
-                <h1>Who Are Our Riders?</h1>
-                <p>While we are here for everyone, some people like to take us out more. See how this varies by area on
-                    the map above. </p>
+                        <h1>Who Are Our Riders?</h1>
+                        <p>While we are here for everyone, some people like to take us out more. See how this varies by
+                            area on
+                            the map above. </p>
 
-                <p class="instructions">Click on different stations to see who our most frequent riders are, by
-                    gender or age. </p>
-                    <br>
-                <h5>Rider Demographics</h5>
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <td>Female</td>
-                            <td><span id="sidebar-station-demo-f">-</span></td>
-                        </tr>
-                        <tr>
-                            <td>Male</td>
-                            <td><span id="sidebar-station-demo-m">-</span></td>
-                        </tr>
-                        <tr>
-                            <td>Unknown</td>
-                            <td><span id="sidebar-station-demo-u">-</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                        <p class="instructions">Click on different stations to see who our most frequent riders are, by
+                            gender or age. </p>
+                        <br>
+                        <h5>Rider Demographics</h5>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Female</td>
+                                    <td><span id="sidebar-station-demo-f">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Male</td>
+                                    <td><span id="sidebar-station-demo-m">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Unknown</td>
+                                    <td><span id="sidebar-station-demo-u">-</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                <h1>Distance Comparison</h1> 
-                <p class="instructions">Click on two stations to see comparative times between driving and biking, as well as the resulting carbon reduction. </p>
+                <h1>Distance Comparison</h1>
+                <p class="instructions">Click on two stations to see comparative times between driving and biking, as
+                    well as the resulting carbon reduction. </p>
                 <br>
                 <small>From: <i><span id="comparison-start">-</span></i></small>
                 <br>
@@ -231,7 +233,7 @@
                     </tr>
                 </table>
                 <small>*Based on <a href="https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle">EPA
-                    estimate of 404g CO<sub>2</sub> per mile</a></small>
+                        estimate of 404g CO<sub>2</sub> per mile</a></small>
             </div>
         </div>
     </section>
@@ -251,7 +253,7 @@
             <div class="row" align="right">
                 <div class="col-md-6">
                     <br>
-                    <div id="carouselExampleControls" id="army" class="carousel slide" data-ride="carousel">
+                    <div id="army-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img class="d-block w-100" src="images/army.png" alt="army">
@@ -316,10 +318,11 @@
                         <p> Every week is different for us. Our riders sometimes take us for short rides, or long
                             adventures. Some months are busier than others; check out your favorite holidays, or see if
                             anyone is riding in the cold. Not only do we help people of all ages and genders get
-                            around, we can also help save fuel and time. 
-                        <p class="instructions">Investigate how many trips we take, how long
-                            our riders keep us, and how that that reduces carbon emission and fuel use by changing the
-                            menus on the right.</p>
+                            around, we can also help save fuel and time.
+                            <p class="instructions">Investigate how many trips we take, how long
+                                our riders keep us, and how that that reduces carbon emission and fuel use by changing
+                                the
+                                menus on the right.</p>
                         </p>
                         <br>
                     </div>
@@ -404,7 +407,7 @@
             <div class="bodytext">
                 <h1>Where Do We Go?</h1>
                 <p> There are some places that our riders love to take us, and some areas where we feel more
-                    welcome than others. Look at where we go by region, and station to station.</p> 
+                    welcome than others. Look at where we go by region, and station to station.</p>
 
                 <p class="instructions"> Click on the
                     outer bars on each diagram to isolate only the trips from that segment.
@@ -492,23 +495,24 @@
                     <div class="bodytext intro" id="documentation">
                         <h2>Process Book</h2>
                         You can find the process book documenting all the steps we took in developing our website
-                        <a href="https://docs.google.com/document/d/1PytOIegtgnR-H_K4oD8CNaJ7YrzeA4DXtWneL5xFsfg/edit?usp=sharing">
-                            here
-                        </a>.
+                        <a href="https://docs.google.com/document/d/1PytOIegtgnR-H_K4oD8CNaJ7YrzeA4DXtWneL5xFsfg/edit?usp=sharing">here</a>.
                         <br><br>
                         <h2>Screen-Cast</h2>
-                        We created a two minute screen-cast with narration showing a demo of our visualization. Here is the
-                        <a href="https://youtu.be/a9ErRUmqRrk">link</a>.
+                        We created a two minute screen-cast with narration showing a demo of our visualization. Here is
+                        the <a href="https://youtu.be/a9ErRUmqRrk">link</a>.
                     </div>
                 </div>
+
                 <div class="col-md-6">
                     <ul class="bodytext intro">Sources and Additional Links
-                        <li><a href="http://www.vicsteinman.com/project/bluebikes">Vic Steinman, Marketing for Blue Bikes</a></li>
+                        <li><a href="http://www.vicsteinman.com/project/bluebikes">Vic Steinman, Marketing for Blue
+                                Bikes</a></li>
                         <li><a href="https://www.bluebikes.com">Official Blue Bikes Website</a></li>
-                        <li><a href="https://www.bostonmagazine.com/news/2018/07/02/lyft-blue-bikes/">Lyft to Acquire Motivate</a></li>
+                        <li><a href="https://www.bostonmagazine.com/news/2018/07/02/lyft-blue-bikes/">Lyft to Acquire
+                                Motivate</a></li>
                         <li><a href="http://motivateco.com">Motivate Company</a></li>
                         <li><a href="https://home.bluecrossma.com/?nichn=Google&nicam=HealthInsuranceBrand&niseg=Brand-Exact&nipkw=bluecrossblueshieldma&gclid=EAIaIQobChMIlfWNw_zv3gIVW4GzCh0EeQynEAAYASAAEgJ15PD_BwE">Blue
-                            Cross Blue Shield</a></li>
+                                Cross Blue Shield</a></li>
                         <li><a href="http://www.8d.com">8D Technologies</a></li>
                         <li><a href="https://www.pbsc.com">PBSC Urban Solutions</a></li>
                     </ul>
