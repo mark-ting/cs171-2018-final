@@ -26,5 +26,6 @@ Image files we used on our website.
 The public website of our project can be found on https://mat3049.github.io/cs171-2018-final/. If the visualizations do not show up, please make sure to unblock the content and load our scripts.
 
 ## Screencast Video
+We created a two minute screen-cast with narration showing a demo of our visualization: https://youtu.be/a9ErRUmqRrk.
 
 
