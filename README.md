@@ -15,6 +15,7 @@ The main html file containing website layout.
 	* main.js: reading the csv file containing trip data from Git LFS, and construct bar chart object and chord diagram objects
 	* barChartDD.js: implementation of the bar chart
 	* chordDiagram.js: implementation of the chord diagrams
+- Backend: codes for data cleanup, data analysis and other backend implementations.
 
 #### 3. `vendor` Directory
 Javascript libraries including bootstrap, d3-tip, d3 version 5, jquery easing, jquery, leaflet, popper and underscore.
