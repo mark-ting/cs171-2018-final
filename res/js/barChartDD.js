@@ -11,8 +11,10 @@ barChart = function(_parentElement, _data){
 barChart.prototype.initVis = function() {
     var vis = this;
 
+    // remove content
     $("#"+vis.parentElement).empty();
 
+    // initialize svg components
     vis.margin = { top: 30, right: 30, bottom: 30, left: 60};
     vis.width = $("#"+vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 400 - vis.margin.top - vis.margin.bottom;
@@ -53,6 +55,7 @@ barChart.prototype.initVis = function() {
         .attr("class", "d3-tip")
         .offset([-5, 0]);
 
+    // dictionary for month and number
     vis.monthDict = {
         '1': 'January',
         '2': 'February',
@@ -77,6 +80,7 @@ barChart.prototype.wrangleData = function(){
 
     vis.stationSelection = d3.select("#station").property("value");
     vis.freqSelection = d3.select("#data-freq").property("value");
+    // filter data based on dropdown boxes
     var filteredData = vis.data.filter(function (d) {
         if(vis.freqSelection=="week") {
             vis.timeSelection = d3.select("#week-drop").property("value");
@@ -110,6 +114,7 @@ barChart.prototype.wrangleData = function(){
             vis.totalDistance += d.distance;
         });
 
+        // sort bike id by number of trips
         var occSort = [];
         for(var key in bikeID) {
             var count = {
@@ -122,6 +127,7 @@ barChart.prototype.wrangleData = function(){
             return b.num - a.num;
         });
 
+        // keep the top 20
         if(occSort.length<=20) vis.displayData = filteredData;
         else{
             occSort = occSort.slice(0, 20);
@@ -153,6 +159,7 @@ barChart.prototype.updateVis = function () {
 
     var infoType = d3.select("#trip-info-type").property("value");
 
+    // calculate the position of bars
     var bikeInfo = {};
     vis.displayData.forEach(function(d){
         if (!(d.bikeid in bikeInfo)) {
@@ -170,6 +177,7 @@ barChart.prototype.updateVis = function () {
         return b.totaldist-a.totaldist;
     });
 
+    // update domain of x-axis and y-axis
     var maxVal = 0;
     for(var key in bikeInfo) {
         if(bikeInfo[key]>maxVal) maxVal = bikeInfo[key];
@@ -180,6 +188,7 @@ barChart.prototype.updateVis = function () {
         return d.bikeid;
     }));
 
+    // sorting
     if(!vis.sorting) vis.y.rangeRound([0, vis.height]);
     else vis.y.rangeRound([vis.height, 0]);
 
@@ -247,6 +256,7 @@ barChart.prototype.updateVis = function () {
         });
 
 
+    // update text block
     var tripSummary = "<span id='summary-title'>Breif Summary:</span><br>";
     var numBikes = Object.keys(bikeInfo).length;
     if (numBikes==20) tripSummary += "More than 20 bikes started from ";
