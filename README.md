@@ -15,13 +15,15 @@ The main html file containing website layout.
 	* main.js: reading the csv file containing trip data from Git LFS, and construct bar chart object and chord diagram objects
 	* barChartDD.js: implementation of the bar chart
 	* chordDiagram.js: implementation of the chord diagrams
-- Backend: codes for data cleanup, data analysis and other backend implementations.
 
 #### 3. `vendor` Directory
 Javascript libraries including bootstrap, d3-tip, d3 version 5, jquery easing, jquery, leaflet, popper and underscore.
 
 #### 4. `images` Directory
 Image files we used on our website.
+
+#### 5. `Backend` Directory 
+Codes for data cleanup, data analysis and other backend implementations.
 
 ## Project Website
 The public website of our project can be found on https://mat3049.github.io/cs171-2018-final/. If the visualizations do not show up, please make sure to unblock the content and load our scripts. The bar charts and chord diagrams will take around 30 seconds to load as the trip data file is over 150 MB.
