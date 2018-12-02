@@ -23,7 +23,7 @@ Javascript libraries including bootstrap, d3-tip, d3 version 5, jquery easing, j
 Image files we used on our website.
 
 ## Project Website
-The public website of our project can be found on https://mat3049.github.io/cs171-2018-final/. If the visualizations do not show up, please make sure to unblock the content and load our scripts.
+The public website of our project can be found on https://mat3049.github.io/cs171-2018-final/. If the visualizations do not show up, please make sure to unblock the content and load our scripts. The bar charts and chord diagrams will take around 30 seconds to load as the trip data file is over 150 MB.
 
 ## Screencast Video
 We created a two minute screen-cast with narration showing a demo of our visualization: https://youtu.be/a9ErRUmqRrk.
